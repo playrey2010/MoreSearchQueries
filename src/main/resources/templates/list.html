@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang=en xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of flights</title>
+</head>
+<body>
+
+<form th:action="@{/processSearch}" method="post">
+    <select name="category">
+        <option value="1">Search by departure or Arrival</option>
+        <option value="2">Search by departure</option>
+    </select>
+    <input type="text" placeholder="Search by departure..." name="search" required>
+    <button type="submit">Search</button>
+</form>
+
+<a href="/add">Add</a>
+<h2>
+    All Flights
+</h2>
+<div th:each="flight : ${flights}">
+    <p th:text="${flight.departsFrom}"></p>
+    <p th:text="${flight.arrivesAt}"></p>
+    <p th:text="${#dates.format(flight.date, 'yyyy-MMM-dd HH:mm')}"></p>
+    <p th:text="${flight.price}"></p>
+    <p th:text="${flight.airline}"></p>
+</div>
+
+</body>
+</html>
