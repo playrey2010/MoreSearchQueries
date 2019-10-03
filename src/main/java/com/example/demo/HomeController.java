@@ -29,13 +29,13 @@ public class HomeController {
 
     @PostMapping("/processFlight")
     public String processFlight(@ModelAttribute Flight flight, @RequestParam(name = "date") String date, @RequestParam(name = "price") String price) {
-//        System.out.println(price);
+//        Handling the price
         Double doublePrice = Double.valueOf(price);
         NumberFormat currency = NumberFormat.getCurrencyInstance();
         String realPrice = currency.format(doublePrice);
         flight.setPrice(realPrice);
 
-//         what is entered in input
+//         Handling the date
         String pattern = "yyyy-MM-dd HH:mm";
         try {
             String formattedDate = date.substring(1);
@@ -60,8 +60,6 @@ public class HomeController {
         else if (category.equalsIgnoreCase("2")) {
             model.addAttribute("departFlights", flightRepository.findByDepartsFromContainingIgnoreCase(search));
         }
-//        model.addAttribute("flights", flightRepository.findByDepartsFromContainingIgnoreCaseOrArrivesAt(search, search2));
-//        model.addAttribute("departflights", flightRepository.findByDepartsFromContainingIgnoreCase(search3));
         return "searchList";
     }
 

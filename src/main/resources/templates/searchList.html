@@ -8,29 +8,22 @@
 <h1>
     Available Flights!
 </h1>
-
+Search by Departure
 <div th:each="flight : ${departFlights}">
     <p th:text="${flight.departsFrom}"></p>
+    <p th:text="${flight.arrivesAt}"></p>
+    <p th:text="${#dates.format(flight.date, 'MMM-dd-yyyy HH:mm')}"></p>
+    <p th:text="${flight.price}"></p>
+    <p th:text="${flight.airline}"></p>
+</div>
+Search by Arrival
+<div th:each="flight : ${arrivalFlights}">
+    <p th:text="${flight.departsFrom}"></p>
+    <p th:text="${flight.arrivesAt}"></p>
+    <p th:text="${#dates.format(flight.date, 'MMM-dd-yyyy HH:mm')}"></p>
+    <p th:text="${flight.price}"></p>
+    <p th:text="${flight.airline}"></p>
 </div>
 
-<!--<div th:each="flight : ${flights}">-->
-<!--&lt;!&ndash;    <p th:text="${flight.date}"></p>&ndash;&gt;-->
-<!--    <p th:text="${flight.departsFrom}"></p>-->
-<!--    <p th:text="${flight.arrivesAt}"></p>-->
-<!--    <p th:text="${#dates.format(flight.date, 'dd-MMM-yyyy')}"></p>-->
-<!--    <p th:text="${flight.price}"></p>-->
-<!--    <p th:text="${flight.airline}"></p>-->
-<!--</div>-->
-<!--<h1>-->
-<!--    departure only-->
-<!--</h1>-->
-<!--<div th:each="flight : ${departflights}">-->
-<!--    &lt;!&ndash;    <p th:text="${flight.date}"></p>&ndash;&gt;-->
-<!--    <p th:text="${flight.departsFrom}"></p>-->
-<!--    <p th:text="${flight.arrivesAt}"></p>-->
-<!--    <p th:text="${#dates.format(flight.date, 'dd-MMM-yyyy')}"></p>-->
-<!--    <p th:text="${flight.price}"></p>-->
-<!--    <p th:text="${flight.airline}"></p>-->
-<!--</div>-->
 </body>
 </html>

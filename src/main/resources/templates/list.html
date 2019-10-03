@@ -8,10 +8,10 @@
 
 <form th:action="@{/processSearch}" method="post">
     <select name="category">
-        <option value="1">Search by departure or Arrival</option>
+        <option value="1">Search by arrival</option>
         <option value="2">Search by departure</option>
     </select>
-    <input type="text" placeholder="Search by departure..." name="search" required>
+    <input type="text" placeholder="Search flight..." name="search" required>
     <button type="submit">Search</button>
 </form>
 
@@ -22,7 +22,7 @@
 <div th:each="flight : ${flights}">
     <p th:text="${flight.departsFrom}"></p>
     <p th:text="${flight.arrivesAt}"></p>
-    <p th:text="${#dates.format(flight.date, 'yyyy-MMM-dd HH:mm')}"></p>
+    <p th:text="${#dates.format(flight.date, 'MMM-dd-yyyy HH:mm')}"></p>
     <p th:text="${flight.price}"></p>
     <p th:text="${flight.airline}"></p>
 </div>
