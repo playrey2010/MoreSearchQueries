@@ -1,45 +1,50 @@
-<!DOCTYPE html>
-<html lang=en xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/normalize.css">
     <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" th:href="@{/css/main.css}">
-    <title>Add a flight</title>
+    <title>$Title$</title>
 </head>
 <body>
 
-
 <form th:action="@{/processFlight}" th:object="${flight}" method="post">
-        <input type="hidden" th:field="*{id}">
-        <input type="hidden" th:field="*{date}">
+<!--    <input type="hidden" th:field="*{id}">-->
+<!--    <input type="hidden" th:field="*{date}">-->
 
-    <h1>Find a flight</h1>
+    <h1>Sign Up</h1>
 
     <fieldset>
         <legend><span class="number">1</span>Your flight</legend>
         <label>Departing from:</label>
-        <input type="text" placeholder="Departure" th:field="*{departsFrom}">
+        <input type="text" placeholder="Departure">
 
         <label>Arriving at:</label>
-        <input type="text" placeholder="Arrival" th:field="*{arrivesAt}">
+        <input type="text" placeholder="Arrival">
 
         <label>Date:</label>
         <input type="datetime-local" name="date">
         <br>
 
         <label>Price:</label>
-        <input type="text" placeholder="Price" th:field="*{price}">
+        <input type="text" placeholder="Price">
 
         <label>Airline:</label>
-        <input type="text" placeholder="Airline" th:field="*{airline}">
+        <input type="text" placeholder="Airline">
         <button type="submit">Submit</button>
 
 
     </fieldset>
 </form>
+
+
+<!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

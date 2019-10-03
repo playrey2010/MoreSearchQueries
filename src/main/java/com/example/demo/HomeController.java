@@ -15,6 +15,11 @@ public class HomeController {
     @Autowired
     FlightRepository flightRepository;
 
+    @RequestMapping("/base")
+    public String base() {
+        return "base";
+    }
+
     @RequestMapping("/")
     public String listFlights(Model model) {
         model.addAttribute("flights", flightRepository.findAll());
@@ -30,6 +35,10 @@ public class HomeController {
     @PostMapping("/processFlight")
     public String processFlight(@ModelAttribute Flight flight, @RequestParam(name = "date") String date, @RequestParam(name = "price") String price) {
 //        Handling the price
+        System.out.println(date.concat(" - this is before doing anything"));
+        if (price.contains("$")) {
+            price = price.substring(1, price.length());
+        }
         Double doublePrice = Double.valueOf(price);
         NumberFormat currency = NumberFormat.getCurrencyInstance();
         String realPrice = currency.format(doublePrice);
@@ -37,11 +46,42 @@ public class HomeController {
 
 //         Handling the date
         String pattern = "yyyy-MM-dd HH:mm";
+        String formattedDate = "";
+
+        boolean inside = false;
         try {
-            String formattedDate = date.substring(1);
-            formattedDate = formattedDate.replace("T", " ");
+            for (Flight flightX : flightRepository.findAll()) {
+                if (flightX.getId() == flight.getId()) {
+                    inside = true;
+                    break;
+                }
+
+            }
+            if (inside) {
+                System.out.println(date + "- This is the date inside");
+                date = date.substring(18, date.length());
+                System.out.println(date);
+                if (date.contains("T")) {
+//                    pattern = "yyyy-MMM-dd HH:mm";
+                    formattedDate = date.replace("T", " ");
+
+                    System.out.println(formattedDate.concat( " - after removing the \"T\""));
+                }
+
+//
+//                pattern = "yyyy-MMM-dd HH:mm";
+//                formattedDate = date.substring(0, date.length()-1);
+//                System.out.println(formattedDate.concat(" - this is the updated version"));
+            } else {
+                formattedDate = date.substring(1);
+                System.out.println(formattedDate.concat(" - after you take out the 1st index"));
+                formattedDate = formattedDate.replace("T", " ");
+                System.out.println(formattedDate.concat(" - after removing the \"T\""));
+            }
+
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
             Date realDate = simpleDateFormat.parse(formattedDate);
+            System.out.println(realDate + "- this is realDate");
             flight.setDate(realDate);
         }
 
@@ -49,6 +89,26 @@ public class HomeController {
             e.printStackTrace();
         }
         flightRepository.save(flight);
+        return "redirect:/";
+    }
+
+    @RequestMapping("/detail/{id}")
+    public String showCourse(@PathVariable("id") long id, Model model) {
+        model.addAttribute("flight", flightRepository.findById(id).get());
+        return "show";
+    }
+
+    @RequestMapping("/update/{id}")
+    public String updateFlight(@PathVariable("id") long id, Model model) {
+        model.addAttribute("flight", flightRepository.findById(id).get());
+        return "flightform";
+    }
+
+    @PostMapping()
+
+    @RequestMapping("/delete/{id}")
+    public String delFlight(@PathVariable("id") long id) {
+        flightRepository.deleteById(id);
         return "redirect:/";
     }
 

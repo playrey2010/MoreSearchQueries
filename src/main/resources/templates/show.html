@@ -4,30 +4,25 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Found flights</title>
+    <title>Show Flight info</title>
 </head>
 <body>
-<h1>
-    Available Flights!
-</h1>
-Search by Departure
-<div th:each="flight : ${departFlights}">
-    <p th:text="${flight.departsFrom}"></p>
-    <p th:text="${flight.arrivesAt}"></p>
-    <p th:text="${#dates.format(flight.date, 'MMM-dd-yyyy HH:mm')}"></p>
-    <p th:text="${flight.price}"></p>
-    <p th:text="${flight.airline}"></p>
-</div>
-Search by Arrival
-<div th:each="flight : ${arrivalFlights}">
-    <p th:text="${flight.departsFrom}"></p>
-    <p th:text="${flight.arrivesAt}"></p>
-    <p th:text="${#dates.format(flight.date, 'MMM-dd-yyyy HH:mm')}"></p>
-    <p th:text="${flight.price}"></p>
-    <p th:text="${flight.airline}"></p>
-</div>
+<a href="/">Show all flights</a><br>
 
+<p th:text="${flight.departsFrom}"></p>
+<p th:text="${flight.arrivesAt}"></p>
+<p th:text="${#dates.format(flight.date, 'MMM-dd-yyyy HH:mm')}"></p>
+<p th:text="${flight.price}"></p>
+<p th:text="${flight.airline}"></p>
 
+<div>
+    <a th:href="@{/update/{id}(id=${flight.id})}">
+        Update
+    </a>&nbsp;-
+    <a th:href="@{/delete/{id}(id=${flight.id})}">
+        Delete
+    </a>
+</div>
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
