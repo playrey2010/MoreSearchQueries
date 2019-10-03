@@ -35,9 +35,9 @@ public class HomeController {
     @PostMapping("/processFlight")
     public String processFlight(@ModelAttribute Flight flight, @RequestParam(name = "date") String date, @RequestParam(name = "price") String price) {
 //        Handling the price
-        System.out.println(date.concat(" - this is before doing anything"));
+//        System.out.println(date.concat(" - this is before doing anything"));
         if (price.contains("$")) {
-            price = price.substring(1, price.length());
+            price = price.substring(1);
         }
         Double doublePrice = Double.valueOf(price);
         NumberFormat currency = NumberFormat.getCurrencyInstance();
@@ -58,30 +58,25 @@ public class HomeController {
 
             }
             if (inside) {
-                System.out.println(date + "- This is the date inside");
+//                System.out.println(date + "- This is the date inside");
                 date = date.substring(18, date.length());
-                System.out.println(date);
+//                System.out.println(date);
                 if (date.contains("T")) {
-//                    pattern = "yyyy-MMM-dd HH:mm";
                     formattedDate = date.replace("T", " ");
 
-                    System.out.println(formattedDate.concat( " - after removing the \"T\""));
+//                    System.out.println(formattedDate.concat( " - after removing the \"T\""));
                 }
 
-//
-//                pattern = "yyyy-MMM-dd HH:mm";
-//                formattedDate = date.substring(0, date.length()-1);
-//                System.out.println(formattedDate.concat(" - this is the updated version"));
             } else {
                 formattedDate = date.substring(1);
-                System.out.println(formattedDate.concat(" - after you take out the 1st index"));
+//                System.out.println(formattedDate.concat(" - after you take out the 1st index"));
                 formattedDate = formattedDate.replace("T", " ");
-                System.out.println(formattedDate.concat(" - after removing the \"T\""));
+//                System.out.println(formattedDate.concat(" - after removing the \"T\""));
             }
 
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
             Date realDate = simpleDateFormat.parse(formattedDate);
-            System.out.println(realDate + "- this is realDate");
+//            System.out.println(realDate + "- this is realDate");
             flight.setDate(realDate);
         }
 
